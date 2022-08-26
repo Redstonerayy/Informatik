@@ -18,7 +18,7 @@ bool isprime(int number, bool roots){
 
 	if(number > 1){
 		int maxtestnumber = (number/lastsquareroot);
-		for(int i = 2; i < maxtestnumber; i++){
+		for(int i = 2; i < maxtestnumber; ++i){
 			if(number % i == 0){
 				return false;
 			}
@@ -31,7 +31,7 @@ bool isprime(int number, bool roots){
 
 int main(){
 	std::vector<int> primes;
-	for(int i = 0; i < 600000; i++){
+	for(int i = 0; i < std::pow(2, 22); ++i){
 		if(isprime(i, true)){
 			primes.push_back(i);
 		}

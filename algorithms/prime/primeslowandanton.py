@@ -24,11 +24,22 @@ def isprime(number, roots):
         return True # returns true for 2 because range(2,2) does not run
     return False
 
+def slowprime(number):
+    #check if prime
+    if number > 1:
+        for i in range(2, number):
+            if number % i == 0:
+                return False
+        return True # returns true for 2 because range(2,2) does not run
+    return False
+
 #start timer
 starttime = time.time()
 primes = []
 
-for i in range(600000):
+for i in range(2 ** 16):
+    # if slowprime(i):
+    #     primes.append(i)
     if isprime(i, True):
         primes.append(i)
 
