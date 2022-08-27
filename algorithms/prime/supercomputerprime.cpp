@@ -44,6 +44,8 @@ void calculate_primes(const int BITS) {
             index++;
         }
     }
+
+    std::cout << primes.size() << "\n";
 }
 
 int main(int argc, char** argv) {
