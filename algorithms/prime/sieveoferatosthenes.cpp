@@ -3,6 +3,7 @@
 #include <cstdint> //use std::uint64_t, its guaranted to be in std:: namespace
 #include <string>
 #include <math.h>
+#include <unordered_map>
 
 void calcprimeu64(std::uint64_t limit){
     //define vectors
@@ -88,30 +89,26 @@ void badcalcimprovedsieve64(std::uint64_t limit){
 
 void calcimprovedsieve64(std::uint64_t limit){
     std::vector<std::uint64_t> primes;
-    std::vector<std::uint64_t> composites;
-    std::uint64_t counter = 2;
-
-    while(counter < limit){
-        std::vector<std::uint64_t> chunk
-
-
-        primes.push_back(counter);
-        composites.push_back(counter + counter);
-    }
-
+    // std::vector<std::uint64_t> composites;
+    // std::unordered_map<std::uint64_t, std::uint64_t> primes;
+    // std::unordered_map<std::uint64_t, bool> composites;
+    std::unordered_map<std::uint64_t, std::vector<std::uint64_t>> primecomposites; //composite, prime
     for(std::uint64_t i = 2; i < limit; ++i){
-        bool prime = true;
         //check if it a composite
-        for(std::uint64_t j = 0; j < composites.size(); ++j){
-            if(i == composites[j]){
-                composites[j] += primes[j];
-                prime = false;
+        if(primecomposites[i].size() > 0){
+            //std::cout << i << "\n";
+            for(int j = 0; j < primecomposites[i].size(); ++j){
+                if(primecomposites.contains(i + primecomposites[i][j])){
+                    primecomposites[i + primecomposites[i][j]].push_back(primecomposites[i][j]);
+                } else {
+                    primecomposites[i + primecomposites[i][j]] = std::vector<std::uint64_t> { primecomposites[i][j] };
+                }
             }
-        }
-        //add it to primes, generate its composite
-        if(prime){
+
+            primecomposites.erase(i);
+        } else {
             primes.push_back(i);
-            composites.push_back(i + i);
+            primecomposites[i + i] = std::vector<std::uint64_t> { i };
         }
     }
 
@@ -119,6 +116,51 @@ void calcimprovedsieve64(std::uint64_t limit){
     // for(std::uint64_t i = 0; i < primes.size(); ++i){
     //     std::cout << primes[i] << "\n";
     // }
+    
+    std::cout << "Length: " << primes.size() << "\n";
+}
+
+void offsetsieve(std::uint64_t limit){
+    std::vector<uint64_t> primes;
+    std::vector<uint64_t> primecomposites;
+    std::uint64_t offset = 2;
+    std::uint64_t chunksize = 4;
+
+    while(offset < limit){
+        std::vector<bool> marks(chunksize);
+        // for(std::uint64_t i = 0; i < primes.size(); ++i){
+        //     for(std::uint64_t j = primecomposites[i]; j < offset + chunksize; j += primes[i]){
+        //         // std::cout << i << ":" << j << "\n";
+        //         marks[j - offset] = true;
+        //     }
+        // }
+        
+        for(std::uint64_t i = offset; i < offset + chunksize; ++i){
+            // std::cout << i << ":" << i - offset << "pos" << "\n";
+            if(!marks[i - offset]){ //is prime
+                // std::cout << i << ":";
+                // std::cout << i - offset << ":" << offset + chunksize << "\n";
+                primes.push_back(i);
+                primecomposites.push_back(0);
+                int reps = i;
+                for(std::uint64_t j = i + i - offset; j < offset + chunksize; j += i){
+                    marks[j] = true;
+                    primecomposites[primecomposites.size() - 1] = j + offset;
+                    reps = j + offset;
+                    std::cout << i << ":" << j << ":" << reps << "\n";
+                }
+            }
+        }
+        offset += chunksize;
+    }
+
+    // std::cout << "------\n";
+    //print primes
+    for(std::uint64_t i = 0; i < primes.size(); ++i){
+        std::cout << primes[i] << "\n";
+        std::cout << primecomposites[i] << "\n";
+    }
+
     std::cout << "Length: " << primes.size() << "\n";
 }
 
@@ -138,9 +180,9 @@ int main(int argc, char** argv){
         limit32 = std::pow(2, 16);
     }
     
-    //calcprimeu64(limit64);
-    //calcprimeu32(limit32);
-    // badcalcimprovedsieve64(limit64);
-
-
+    // calcprimeu64(limit64);
+    // calcprimeu32(limit32);
+    // calcimprovedsieve64(limit64);
+    offsetsieve(4);
+    // offsetsieve(20);
 }
