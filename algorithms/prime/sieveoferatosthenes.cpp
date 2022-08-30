@@ -120,46 +120,48 @@ void calcimprovedsieve64(std::uint64_t limit){
     std::cout << "Length: " << primes.size() << "\n";
 }
 
-void offsetsieve(std::uint64_t limit){
+void offsetsieve(std::uint64_t limit, std::uint64_t chunksize){
     std::vector<uint64_t> primes;
     std::vector<uint64_t> primecomposites;
     std::uint64_t offset = 2;
-    std::uint64_t chunksize = 4;
+    if(chunksize > limit){
+        chunksize = limit;
+    }
 
     while(offset < limit){
         std::vector<bool> marks(chunksize);
-        // for(std::uint64_t i = 0; i < primes.size(); ++i){
-        //     for(std::uint64_t j = primecomposites[i]; j < offset + chunksize; j += primes[i]){
-        //         // std::cout << i << ":" << j << "\n";
-        //         marks[j - offset] = true;
-        //     }
-        // }
+
+        //mark known primes
+        for(std::uint64_t i = 0; i < primecomposites.size(); ++i){
+            while(primecomposites[i] < offset + chunksize){
+                marks[primecomposites[i] - offset] = true;
+                primecomposites[i] += primes[i];
+            }
+        }
         
         for(std::uint64_t i = offset; i < offset + chunksize; ++i){
             // std::cout << i << ":" << i - offset << "pos" << "\n";
+            if(i >= limit){
+                break;
+            }
             if(!marks[i - offset]){ //is prime
                 // std::cout << i << ":";
                 // std::cout << i - offset << ":" << offset + chunksize << "\n";
                 primes.push_back(i);
-                primecomposites.push_back(0);
-                int reps = i;
-                for(std::uint64_t j = i + i - offset; j < offset + chunksize; j += i){
-                    marks[j] = true;
-                    primecomposites[primecomposites.size() - 1] = j + offset;
-                    reps = j + offset;
-                    std::cout << i << ":" << j << ":" << reps << "\n";
+                primecomposites.push_back(i + i);
+                for(std::uint64_t j = i + i; j < offset + chunksize; j += i){
+                    marks[j - offset] = true;
+                    primecomposites[primecomposites.size() - 1] += i;
                 }
             }
         }
         offset += chunksize;
     }
 
-    // std::cout << "------\n";
     //print primes
-    for(std::uint64_t i = 0; i < primes.size(); ++i){
-        std::cout << primes[i] << "\n";
-        std::cout << primecomposites[i] << "\n";
-    }
+    // for(std::uint64_t i = 0; i < primes.size(); ++i){
+    //     std::cout << primes[i] << "\n";
+    // }
 
     std::cout << "Length: " << primes.size() << "\n";
 }
@@ -183,6 +185,6 @@ int main(int argc, char** argv){
     // calcprimeu64(limit64);
     // calcprimeu32(limit32);
     // calcimprovedsieve64(limit64);
-    offsetsieve(4);
+    offsetsieve(std::pow(2,30), std::pow(2,30));
     // offsetsieve(20);
 }

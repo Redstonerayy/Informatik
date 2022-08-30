@@ -31,7 +31,7 @@ bool isprime(int number, bool roots){
 
 int main(){
 	std::vector<int> primes;
-	for(int i = 0; i < std::pow(2, 8); ++i){
+	for(int i = 0; i < std::pow(2,24); ++i){
 		if(isprime(i, true)){
 			primes.push_back(i);
 		}
