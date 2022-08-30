@@ -1,4 +1,7 @@
 #simple function
+from curses.ascii import isprint
+
+
 def isprime(number):
     if number > 1:
         for i in range(2, number):
@@ -8,6 +11,5 @@ def isprime(number):
         return True
     return False
 
-for i in range(20):
-    if isprime(i):
-        print(i)
+i = int(input())
+print(isprime(i))
