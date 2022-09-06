@@ -20,10 +20,10 @@ def binaeres_suchen(buchstabe, reihung):
 	indexErgebnis = -1
 	gefunden = False
 	links = 0
-	check = 0
+	checks = 0
 	rechts = len(reihung)-1
 	while not gefunden and links <= rechts:
-		check += 1
+		checks += 1
 		mitte = (links + rechts) // 2
 		if buchstabe == reihung[mitte]:
 			gefunden = True
@@ -33,7 +33,7 @@ def binaeres_suchen(buchstabe, reihung):
 		else:
 			links = mitte+1
 	
-	return indexErgebnis, check
+	return indexErgebnis, checks
 
 def test_search(num):
 	for i in range(num):
@@ -54,5 +54,5 @@ def check_million():
 			hightest = accesses
 	print(i, hightest, 2 ** i)
 
-test_search()
+test_search(15)
 check_million()
