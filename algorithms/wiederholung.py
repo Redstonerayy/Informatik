@@ -1,9 +1,12 @@
 # Anton Rodenwald Nr.5 am 6.9.22
 import re 
 
+# regex for mail
+# n amount of lower alphabet characters or ., then @, n amount of lower alphabet characters, then ., n amount of lower alphabet characters
 mailvalid = r"[a-z.]+@[a-z]+\.[a-z]+"
 
-def ismailvalid(address):
+# define function which return the result of the regex
+def ismailvalid(address) -> bool: 
 	return bool(re.match(mailvalid, address))
 
 adresses = [
@@ -21,5 +24,6 @@ adresses = [
 	"trygstad@comcast.net",
 ]
 
+# test regex
 for i in adresses:
 	print(ismailvalid(i))
