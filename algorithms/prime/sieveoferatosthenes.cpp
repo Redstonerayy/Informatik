@@ -39,11 +39,12 @@ void offsetsieve(std::uint64_t limit, std::uint64_t chunksize){
         offset += chunksize;
     }
 
-    //print primes
+    // print primes
     // for(std::uint64_t i = 0; i < primes.size(); ++i){
     //     std::cout << primes[i] << "\n";
     // }
 
+    std::cout << primes[primes.size() - 1] << "\n";
     std::cout << "Length: " << primes.size() << "\n";
 }
 
