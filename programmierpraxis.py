@@ -1,7 +1,4 @@
 import math
-import sys
-from unicodedata import numeric
-
 # Aufgabe 1
 # function to calculate average
 def average(values):
