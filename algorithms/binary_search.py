@@ -6,7 +6,6 @@ b) pro suche werden jeweils die haelfte der stellen ausgeschlossen
 c) der index ist negativ, also -1
 """
 
-
 import random
 import string
 

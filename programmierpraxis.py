@@ -2,11 +2,11 @@ import math
 # Aufgabe 1
 # function to calculate average
 def average(values):
-	sum = 0
+	sum_ = 0
 	for i in values:
-		sum += i
+		sum_ += i
 
-	return sum/len(values)
+	return sum_ /len(values)
 
 
 tanken = [123, 134, 120, 122]
