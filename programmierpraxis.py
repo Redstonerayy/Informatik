@@ -1,5 +1,6 @@
 import math
 import sys
+from unicodedata import numeric
 
 # Aufgabe 1
 # function to calculate average
@@ -60,11 +61,23 @@ print("Aufgabe 3")
 for i in numbers:
 	print("Index: ", getmindistance(i))
 
+
+# kleinste zahl der liste
+def getallmindisctance(numberarray):	
+	shortest = None
+	indexes = None
+	for i in range(len(numberarray) - 1):
+		for j in range(i + 1, len(numberarray) - 1):
+			diff = abs(numberarray[i] - numberarray[j])
+			if shortest == None or shortest > diff:
+				shortest = diff
+				indexes = [i, j]
+
+	return indexes
+
+
+
 print("Aufagbe 3 Advanced")
 for i in numbers:
-	shortest = sys.m
-	for j in range(len(i)):
-		for k in range(j + 1, len(i)):
-			diff = abs(i[j] - i[k])
-			if diff < shortest:
-				shortest = diff
+	indexes = getallmindisctance(i)
+	print(i[indexes[0]], i[indexes[1]])
