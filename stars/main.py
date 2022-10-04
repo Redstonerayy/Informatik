@@ -1,5 +1,5 @@
 from stardiff import *
-from stardiff import checksize
+from stardiff import checklighting
 
 # diff = imagediff(bild1, bild2)
 # printimg(diff)
@@ -9,4 +9,5 @@ from stardiff import checksize
 # joined = [*img1data, *img2data, *diffdata]
 # imgfromdata(joined, 10, 30)
 printimg(bild1)
-checksize(bild1)
+light = checklighting(bild1)
+gradient(light, "light.png")

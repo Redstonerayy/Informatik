@@ -35,22 +35,48 @@ def makeimg(img, filename):
 
 	return data
 
+def gradient(img, filename):
+	data = []
+	for i in range(len(img)):
+		for j in range(len(img[0])):
+			if img[i][j]:
+				data.append(255 * img[i][j]/9)
+			else:
+				data.append(0)
+
+	img = Image.new('L', (len(img[0]), len(img)))
+	img.putdata(data)
+	img.save(filename)
+
 def imgfromdata(data, x, y):
 	img = Image.new('L', (x, y))
 	img.putdata(data)
 	img.save("joined.png")
 
-def checksize(img):
+def checklighting(img):
+	light = []
+	blacks = 0
 	for y in range(len(img)):
+		row = []
 		for x in range(len(img[y])):
 			lcount, lchecks = checkpixel(img, x, y)
 			if img[y][x]:
+				print("white")
 				print(y, x)
 				print(lcount, lchecks)
 			else:
 				if lchecks == 9 and lcount == 0: # dark square 3x3
+					blacks += 1
+					print("black")
 					print(y, x)
 					print(lcount, lchecks)
+			
+			row.append(lcount)
+		light.append(row)
+	printimg(light)
+	print(blacks)
+
+	return light
 
 
 def checkpixel(img, x, y):
