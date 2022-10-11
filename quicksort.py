@@ -50,4 +50,10 @@ print(liste)
 * Use insertion sort if length of list is small
 * random(slow generation, good against malicious input??), 
   middle or median element(best), first/last is slow for sorted input, worst case
+
+https://en.wikipedia.org/wiki/Quicksort
+https://en.wikipedia.org/wiki/Insertion_sort
+https://en.wikipedia.org/wiki/Median
+https://stackoverflow.com/questions/7559608/median-of-three-values-strategy
+
 """
