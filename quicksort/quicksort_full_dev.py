@@ -52,9 +52,6 @@ def quicksort(array_, start, end):
 	if start >= end or start < 0:
 		return
 	pivot = array_[end]
-	# med = median([array_[start], array_[len(array_) // 2], array_[end]])
-	# pivot = array_[med]
-	# print(med, array_[med])
 
 	i = start - 1
 
