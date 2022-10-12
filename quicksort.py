@@ -16,8 +16,40 @@ def swap(array_, i1, i2):
 	array_[i2] = temp
 	return array_
 
+def hoare_partition(array_, start, end):
+	pivot = array_[(start + end) // 2]
+	print("Pivot", pivot)
+
+	i = start - 1
+	j = end + 1
+
+	while True:
+		i += 1
+		while array_[i] < pivot:
+			i += 1
+
+		j -= 1
+		while array_[j] > pivot:
+			j -= 1
+
+		print(array_)
+		print("Pointers", i, j)
+		if i >= j:
+			return j
+		
+		swap(array_, i, j)
+
+def hoare(array_, start, end):
+	if start >= 0 and end >= 0 and start < end:
+		crossing = hoare_partition(array_, start, end)
+
+		hoare(array_, start, crossing)
+		hoare(array_, crossing + 1, end)
+
+
+
 def quicksort(array_, start, end):
-	if start >= end:
+	if start >= end or start < 0:
 		return
 	pivot = array_[end]
 	# med = median([array_[start], array_[len(array_) // 2], array_[end]])
@@ -41,7 +73,8 @@ def quicksort(array_, start, end):
 liste = gen(10, 10)
 print(liste)
 print("-----")
-quicksort(liste, 0, len(liste) - 1)
+# quicksort(liste, 0, len(liste) - 1)
+hoare(liste, 0, len(liste) - 1)
 print("-----")
 print(liste)
 
