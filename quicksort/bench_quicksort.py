@@ -84,4 +84,4 @@ if __name__ == "__main__":
         liste = gen(i, i)
         bench_h(liste[:])
         bench_l(liste[:])
-        bench_b(liste[:])
+        # bench_b(liste[:])
