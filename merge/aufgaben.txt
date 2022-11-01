@@ -1,0 +1,2 @@
+Für 2 in gleicher Art sortierte Reihungen lassen sich diese zu einer
+Sortierten Reihung, die alle Elemente beider Reihungen enhält, zusammenfügen.

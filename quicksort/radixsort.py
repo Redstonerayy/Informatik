@@ -18,13 +18,11 @@ def countingSort(arr, exp1):
 		index = (arr[i]/exp1)
 		count[int((index)%10)] += 1
 
-	print(count)
 	# Change count[i] so that count[i] now contains actual
 	# position of this digit in output array
 	for i in range(1,10):
 		count[i] += count[i-1]
 
-	print(count)
 	# Build the output array
 	i = n-1
 	while i>=0:
@@ -32,7 +30,6 @@ def countingSort(arr, exp1):
 		output[ count[ int((index)%10) ] - 1] = arr[i]
 		count[int((index)%10)] -= 1
 		i -= 1
-	print(count)
 
 	# Copying the output array to arr[],
 	# so that arr now contains sorted numbers
