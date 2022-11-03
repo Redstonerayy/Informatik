@@ -1,5 +1,6 @@
 import random
 
+# acutally quicksort
 def gen(length, max):
 	return [random.randint(0,max) for i in range(length)]
 
