@@ -1,9 +1,8 @@
-import random
-
-# set seed so output is comparable
-random.seed(10)
+import numpy as np
+from numba import jit
 
 # swap to  values of array at indices i1, i2
+@jit(nopython=True)
 def swap(array_, i1, i2):
     temp = array_[i1]
     array_[i1] = array_[i2]
@@ -11,12 +10,14 @@ def swap(array_, i1, i2):
 
 
 # generate random unsorted list
-def gen(length: int):
-    liste = [random.randint(0, 100) for i in range(length)]
+@jit(nopython=True)
+def gen(length):
+    liste = np.random.randint(0, 100, length)
     return liste
 
 
 # in place merge
+@jit(nopython=True)
 def merge(_array, start, middle, end):
     j = end
     while True:
@@ -41,6 +42,7 @@ def merge(_array, start, middle, end):
             k -= 1
 
 # in place sort
+@jit(nopython=True)
 def mergesort(_array, start, end):
     # if length of array is 1 or 2, sorting is easy and it can be returned
     if end - start == 0:
@@ -63,7 +65,7 @@ def mergesort(_array, start, end):
         return
 
 
-liste = gen(1000000)
+liste = gen(100000)
 # print(liste)
 mergesort(liste, 0, len(liste) - 1)
 # print(liste)
