@@ -15,9 +15,32 @@ def gen(length: int):
     liste = [random.randint(0, 100) for i in range(length)]
     return liste
 
+# not in place, middle is includesive
+def merge_faster_more_space(_array, start, middle, end):
+    i = start
+    j = middle + 1
+    result = []
+    # compare and add elements
+    while i < middle + 1 and j < end + 1:
+        if _array[i] < _array[j]:
+            result.append(_array[i])
+            i += 1
+        else:
+            result.append(_array[j])
+            j += 1
 
+    # add rest of the unfinished array
+    if i < middle + 1:
+        result += _array[i:middle + 1]
+    else:
+        result += _array[j:end + 1]
+
+    # write back into original array
+    for i in range(start, end + 1):
+        _array[i] = result[i - start]
+    
 # in place merge
-def merge(_array, start, middle, end):
+def merge_in_place_slow(_array, start, middle, end):
     j = end
     while True:
         # get element of second array where the largest element of first array is bigger
@@ -26,7 +49,7 @@ def merge(_array, start, middle, end):
             j -= 1
 
         # check if finished
-        if j <= middle + 1:
+        if j < middle + 1:
             break
 
         # swap the element of array 1 into array 2
@@ -58,12 +81,12 @@ def mergesort(_array, start, end):
 
         # merge these already sorted parts into a sorted
         # part which can be used in the next upper recursion step
-        merge(_array, start, middle, end)
+        merge_faster_more_space(_array, start, middle, end)
 
         return
 
 
-liste = gen(1000000)
+liste = gen(100)
 # print(liste)
 mergesort(liste, 0, len(liste) - 1)
-# print(liste)
+print(liste)

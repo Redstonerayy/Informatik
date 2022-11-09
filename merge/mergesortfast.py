@@ -27,7 +27,7 @@ def merge(_array, start, middle, end):
             j -= 1
 
         # check if finished
-        if j <= middle + 1:
+        if j < middle + 1:
             break
 
         # swap the element of array 1 into array 2
@@ -65,7 +65,7 @@ def mergesort(_array, start, end):
         return
 
 
-liste = gen(100000)
+liste = gen(1000)
 # print(liste)
 mergesort(liste, 0, len(liste) - 1)
-# print(liste)
+print(liste)
