@@ -15,6 +15,8 @@ def gen(length: int):
     return liste
 
 def merge(arr1, arr2):
+    # merge two sorted lists into one sorted list
+    # and return this list
     i = 0
     j = 0
     result = []
@@ -36,6 +38,8 @@ def merge(arr1, arr2):
     return result
 
 def mergesort(_array):
+    # for lists of length 2 or less return it
+    # in sorted form
     if len(_array) == 1:
         return _array
     elif len(_array) == 2:
@@ -43,6 +47,7 @@ def mergesort(_array):
             return [_array[1], _array[0]]
         return _array
     else:
+        # recursively call the sort on two parts of the list
         middle = len(_array) // 2
         return merge(mergesort(_array[:middle]), mergesort(_array[middle:]))
 

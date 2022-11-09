@@ -15,8 +15,11 @@ def gen(length: int):
     liste = [random.randint(0, 100) for i in range(length)]
     return liste
 
-# not in place, middle is includesive
+# not in place, middle is inclusive
 def merge_faster_more_space(_array, start, middle, end):
+    # code to merge the 2 unsorted parts of the list
+    # into a new list and overwrite the main list with
+    # the sorted values at the right indices
     i = start
     j = middle + 1
     result = []
@@ -82,11 +85,13 @@ def mergesort(_array, start, end):
         # merge these already sorted parts into a sorted
         # part which can be used in the next upper recursion step
         merge_faster_more_space(_array, start, middle, end)
+        # merge_in_place_slow(_array, start, middle, end)
 
         return
 
 
+# test program
 liste = gen(100)
-# print(liste)
+print(liste)
 mergesort(liste, 0, len(liste) - 1)
 print(liste)
