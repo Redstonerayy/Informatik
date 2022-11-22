@@ -9,10 +9,12 @@ def swap(array_, i1, i2):
     array_[i1] = array_[i2]
     array_[i2] = temp
 
+
 # generate random unsorted list
 def gen(length: int):
     liste = [random.randint(0, 100) for i in range(length)]
     return liste
+
 
 def merge(arr1, arr2):
     # merge two sorted lists into one sorted list
@@ -36,6 +38,7 @@ def merge(arr1, arr2):
         result += arr2[j:]
 
     return result
+
 
 def mergesort(_array):
     # for lists of length 2 or less return it
