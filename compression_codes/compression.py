@@ -27,6 +27,7 @@ def getmean(img, x, y, xcount, ycount):
 
 def scale(img, scalex, scaley):
 	xcomb = round(len(img[0])/scalex)
+	print(xcomb)
 	ycomb = round(len(img)/scaley)
 	newimg = [[0 for i in range(scalex)] for j in range(scaley)]
 	for y in range(scaley):
@@ -36,10 +37,18 @@ def scale(img, scalex, scaley):
 
 newi = scale(img, 3, 3)
 
-img1 = Image.new("L", (len(img[0]), len(img)))
-img1.putdata(list(chain(*img)))
-img1.save("unscaled.png")
+for i in newi:
+	print(i)
 
-img2 = Image.new("L", (len(newi[0]), len(newi)))
-img2.putdata(list(chain(*newi)))
-img2.save("scaled.png")
+newi = scale(img, 2, 2)
+
+for i in newi:
+	print(i)
+
+# img1 = Image.new("L", (len(img[0]), len(img)))
+# img1.putdata(list(chain(*img)))
+# img1.save("unscaled.png")
+
+# img2 = Image.new("L", (len(newi[0]), len(newi)))
+# img2.putdata(list(chain(*newi)))
+# img2.save("scaled.png")
