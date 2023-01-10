@@ -2,7 +2,7 @@ import random # get random indexes to apply noise to
 import numpy as np # get random stream of "bytes"
 
 #7, 4 hamming codes
-msg = [1, 0, 0, 1] # 1,2,3,4
+msg = [0, 1, 1, 0] # 1,2,3,4
 
 # function to determine the safety bits
 def encode(msg):
@@ -40,6 +40,7 @@ def decode(msg):
 	c1 = (msg[0] + msg[1] + msg[3] + msg[4]) % 2 == 0 # add bits and check
 	c2 = (msg[0] + msg[2] + msg[3] + msg[5]) % 2 == 0 # add bits and check
 	c3 = (msg[1] + msg[2] + msg[3] + msg[6]) % 2 == 0 # add bits and check
+	print(c1, c2, c3)
 	bits = set([0, 1, 2, 3, 4, 5, 6]) # set of indices where a bit could be wrong
 	# for every parity group
 	# if even(true) then (assume) no error in this group
@@ -76,6 +77,7 @@ def decode(msg):
 # driver code
 encoded = encode(msg)
 print(encoded)
+print(encoded[4:6] + [encoded[0]] + [encoded[-1]] + encoded[1:4])
 noise = noise(encoded, 1)
 print(noise)
 decoded = decode(noise)

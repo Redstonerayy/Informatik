@@ -1,3 +1,0 @@
-[submodule "quicksort/radixsort"]
-	path = quicksort/radixsort
-	url = https://github.com/bitshifter/radixsort.git
