@@ -20,13 +20,24 @@ def rotate(bild, angle): # 1, 2, 3 = 90*, 180*, 270* to the right
 	width = len(bild[0])
 	height = len(bild)
 	if angle == 1 or angle == 3:
-		pass
-	else: # 180*	
+		newimg = [] # new img
+		for x in ( range(width) if angle == 1 else range(width - 1, -1, -1) ):
+			newrow = []
+			for y in ( range(height - 1, -1, -1) if angle == 1 else range(height) ): # traverse in reverse order
+				print(x,y)
+				newrow.append(bild[y][x])
+			print(newrow)
+			newimg.append(newrow)
+		return newimg
+
+	else: # 180*, in-place
 		for x in range(width):
 			for y in range(height // 2):
 				temp = bild[y][x]
 				bild[y][x] = bild[height - 1 - y][width - 1 - x]
 				bild[height - 1 - y][width - 1 - x] = temp
+
+	return bild
 
 def printbild(bild):
 	for row in bild:
@@ -40,6 +51,7 @@ bild = [
 printbild(bild)
 # mirror_vertical(bild)
 # mirror_horizontal(bild)
-rotate(bild, 2)
+print("")
+bild = rotate(bild, 3)
 printbild(bild)
 
